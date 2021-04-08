@@ -1,0 +1,8 @@
+tasks.dokkaHtmlPartial.configure {
+    dokkaSourceSets {
+        named("main") {
+            moduleName.set("Submodule 2")
+            includes.from("module.md", "packages.md")
+        }
+    }
+}

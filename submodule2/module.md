@@ -1,0 +1,3 @@
+# Module Submodule 2
+
+This submodule does stuff too...

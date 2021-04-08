@@ -1,5 +1,6 @@
 plugins {
     id "org.jetbrains.kotlin.jvm" version "1.4.31"
+    id "org.jetbrains.dokka" version "1.4.30"
 }
 
 group "org.example.dokka"
@@ -7,9 +8,12 @@ version "1.0-SNAPSHOT"
 
 allprojects {
     apply plugin: "kotlin"
+    apply plugin: "org.jetbrains.dokka"
 
     repositories {
         mavenCentral()
+        maven { url = "https://dl.bintray.com/kotlin/dokka"}
+        maven { url "https://dl.bintray.com/kotlin/kotlinx" }
     }
 }
 
@@ -17,4 +21,13 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
 
     implementation project("submodule")
+}
+
+tasks.dokkaHtml.configure {
+    dokkaSourceSets {
+        named("main") {
+            moduleName.set("Dokka Multi-Module Example")
+            includes.from("module.md", "packages.md")
+        }
+    }
 }
