@@ -31,3 +31,28 @@ tasks.dokkaHtml.configure {
         }
     }
 }
+
+tasks.dokkaHtmlMultiModule.configure {
+    outputDirectory.set(file("${getRootDir()}/dokka"))
+}
+
+/**
+ * Task that copies all .png files from the documentation folder to the build/javadoc/doc-files
+ * folder so that they can be referenced in the generated documentation.
+ */
+task copyDocumentationImages(type: Copy){
+    from ('images'){
+        include '*.jpg'
+    }
+    into "${getRootDir()}/dokka/images"
+}
+
+/**
+ * Task that will generate Dokka documentation and copy the images to the build
+ * folder to be referenced.  This is a workaround since Dokka does not currently support
+ * embedding images.
+ */
+task generateDocumentation(){
+    dependsOn 'dokkaHtmlMultiModule'
+    dependsOn 'copyDocumentationImages'
+}
