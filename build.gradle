@@ -1,0 +1,20 @@
+plugins {
+    id "org.jetbrains.kotlin.jvm" version "1.4.31"
+}
+
+group "org.example.dokka"
+version "1.0-SNAPSHOT"
+
+allprojects {
+    apply plugin: "kotlin"
+
+    repositories {
+        mavenCentral()
+    }
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib"
+
+    implementation project("submodule")
+}
